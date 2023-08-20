@@ -15,13 +15,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import kz.btokmyrza.calorytracker.core.R
+import kz.btokmyrza.calorytracker.core.navigation.Route
+import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.core_ui.theme.LocalSpacing
 import kz.btokmyrza.calorytracker.onboarding_presentation.common.components.ActionButton
 
 @Composable
 fun WelcomeScreen(
-
+    onNavigate: (UiEvent.Navigate) -> Unit,
 ) {
     val spacing = LocalSpacing.current
     Column(
@@ -40,7 +42,7 @@ fun WelcomeScreen(
         ActionButton(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = stringResource(id = R.string.next),
-            onClick = {},
+            onClick = { onNavigate(UiEvent.Navigate(Route.ONBOARDING_AGE)) },
         )
     }
 }
@@ -49,6 +51,6 @@ fun WelcomeScreen(
 @Composable
 fun WelcomeScreenPreview() {
     CaloryTrackerTheme {
-        WelcomeScreen()
+        WelcomeScreen(onNavigate = {})
     }
 }
