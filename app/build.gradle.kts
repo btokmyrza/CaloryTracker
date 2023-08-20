@@ -64,6 +64,7 @@ dependencies {
     implementation(DaggerHilt.daggerHiltAndroid)
     kapt(DaggerHilt.daggerHiltCompiler)
 
+    implementation(project(Modules.coreData))
     implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
     implementation(project(Modules.onboardingPresentation))

@@ -2,6 +2,7 @@ object Modules {
 
     const val app = ":app"
 
+    const val coreData = ":core-data"
     const val core = ":core"
     const val coreUi = ":core-ui"
 
