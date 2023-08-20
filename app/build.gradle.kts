@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = ProjectConfig.appId
+    namespace = "kz.btokmyrza.calorytracker"
     compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
@@ -53,6 +53,7 @@ dependencies {
     implementation(Compose.composeAnimation)
     implementation(Compose.ui)
     implementation(Compose.uiToolingPreview)
+    debugImplementation(Compose.uiTooling)
     implementation(Compose.material)
     implementation(Compose.composeRuntime)
     implementation(Compose.navigation)
@@ -64,6 +65,7 @@ dependencies {
     kapt(DaggerHilt.daggerHiltCompiler)
 
     implementation(project(Modules.core))
+    implementation(project(Modules.coreUi))
     implementation(project(Modules.onboardingPresentation))
     implementation(project(Modules.onboardingDomain))
     implementation(project(Modules.trackerPresentation))

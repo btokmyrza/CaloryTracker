@@ -4,7 +4,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 
 android {
-    namespace ProjectConfig.appId
     compileSdk ProjectConfig.compileSdk
 
     defaultConfig {
@@ -41,6 +40,7 @@ dependencies {
     implementation Compose.compiler
     implementation Compose.ui
     implementation Compose.uiToolingPreview
+    debugImplementation Compose.uiTooling
     implementation Compose.hiltNavigationCompose
     implementation Compose.material
     implementation Compose.composeRuntime

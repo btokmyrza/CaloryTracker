@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.ui.theme
+package kz.btokmyrza.calorytracker.core_ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
