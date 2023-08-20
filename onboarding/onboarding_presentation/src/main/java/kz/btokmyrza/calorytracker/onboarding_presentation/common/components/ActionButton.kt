@@ -41,7 +41,7 @@ internal fun ActionButton(
 private fun ActionButtonEnabledPreview() {
     CaloryTrackerTheme {
         ActionButton(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(8.dp),
             text = "Action Button Text",
             onClick = {},
         )
@@ -53,7 +53,7 @@ private fun ActionButtonEnabledPreview() {
 private fun ActionButtonDisabledPreview() {
     CaloryTrackerTheme {
         ActionButton(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(8.dp),
             text = "Action Button Text",
             isEnabled = false,
             onClick = {},
