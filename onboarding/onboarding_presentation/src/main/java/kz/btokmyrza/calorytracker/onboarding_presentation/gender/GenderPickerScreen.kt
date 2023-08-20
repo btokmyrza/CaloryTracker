@@ -115,7 +115,7 @@ private fun GenderButtons(
 
 @Preview(showSystemUi = true)
 @Composable
-private fun WelcomeScreenPreview() {
+private fun GenderPickerScreenPreview() {
     CaloryTrackerTheme {
         GenderPickerScreenContent(
             selectedGender = Gender.Male,
