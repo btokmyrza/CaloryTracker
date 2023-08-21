@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.onboarding_presentation.feature.goal
+package kz.btokmyrza.calorytracker.onboarding_presentation.feature.goal_type
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

@@ -18,7 +18,7 @@ import kz.btokmyrza.calorytracker.navigation.navigate
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.activity_level.ActivityLevelPickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.age.AgeEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.gender.GenderPickerScreen
-import kz.btokmyrza.calorytracker.onboarding_presentation.feature.goal.GoalTypePickerScreen
+import kz.btokmyrza.calorytracker.onboarding_presentation.feature.goal_type.GoalTypePickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.height.HeightEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.weight.WeightEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.welcome.WelcomeScreen
