@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.onboarding_presentation.age
+package kz.btokmyrza.calorytracker.onboarding_presentation.feature.age
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.onboarding_presentation.gender
+package kz.btokmyrza.calorytracker.onboarding_presentation.feature.gender
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

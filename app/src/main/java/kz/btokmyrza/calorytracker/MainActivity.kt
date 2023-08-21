@@ -16,9 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kz.btokmyrza.calorytracker.core.navigation.Route
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.navigation.navigate
-import kz.btokmyrza.calorytracker.onboarding_presentation.age.AgeEnterScreen
-import kz.btokmyrza.calorytracker.onboarding_presentation.gender.GenderPickerScreen
-import kz.btokmyrza.calorytracker.onboarding_presentation.welcome.WelcomeScreen
+import kz.btokmyrza.calorytracker.onboarding_presentation.feature.age.AgeEnterScreen
+import kz.btokmyrza.calorytracker.onboarding_presentation.feature.gender.GenderPickerScreen
+import kz.btokmyrza.calorytracker.onboarding_presentation.feature.welcome.WelcomeScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

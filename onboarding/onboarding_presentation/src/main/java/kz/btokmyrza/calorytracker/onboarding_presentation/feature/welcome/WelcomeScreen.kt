@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.onboarding_presentation.welcome
+package kz.btokmyrza.calorytracker.onboarding_presentation.feature.welcome
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

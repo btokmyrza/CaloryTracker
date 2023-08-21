@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.onboarding_presentation.gender
+package kz.btokmyrza.calorytracker.onboarding_presentation.feature.gender
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
