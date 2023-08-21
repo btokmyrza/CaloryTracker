@@ -20,8 +20,8 @@ class GenderPickerViewModel @Inject constructor(
     private val preferences: Preferences,
 ) : ViewModel() {
 
-     var selectedGender by mutableStateOf<Gender>(Gender.Male)
-         private set
+    var selectedGender by mutableStateOf<Gender>(Gender.Male)
+        private set
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()

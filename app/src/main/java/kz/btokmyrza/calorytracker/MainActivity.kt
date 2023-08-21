@@ -18,6 +18,7 @@ import kz.btokmyrza.calorytracker.navigation.navigate
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.activity_level.ActivityLevelPickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.age.AgeEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.gender.GenderPickerScreen
+import kz.btokmyrza.calorytracker.onboarding_presentation.feature.goal.GoalTypePickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.height.HeightEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.weight.WeightEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.welcome.WelcomeScreen
@@ -67,10 +68,10 @@ class MainActivity : ComponentActivity() {
                         composable(route = Route.ONBOARDING_ACTIVITY_LEVEL) {
                             ActivityLevelPickerScreen(onNavigate = navController::navigate)
                         }
-                        composable(route = Route.ONBOARDING_NUTRIENT_GOAL) {
-
-                        }
                         composable(route = Route.ONBOARDING_GOAL) {
+                            GoalTypePickerScreen(onNavigate = navController::navigate)
+                        }
+                        composable(route = Route.ONBOARDING_NUTRIENT_GOAL) {
 
                         }
                         composable(route = Route.TRACKER_OVERVIEW) {
