@@ -43,7 +43,7 @@ fun GenderPickerScreen(
     }
     GenderPickerScreenContent(
         selectedGender = viewModel.selectedGender,
-        onGenderClick = viewModel::onGenderClick,
+        onGenderClick = viewModel::onGenderClicked,
         onNextClick = viewModel::onNextClick,
     )
 }

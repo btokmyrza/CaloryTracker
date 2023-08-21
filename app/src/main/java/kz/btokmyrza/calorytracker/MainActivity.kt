@@ -3,6 +3,12 @@ package kz.btokmyrza.calorytracker
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -10,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kz.btokmyrza.calorytracker.core.navigation.Route
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.navigation.navigate
+import kz.btokmyrza.calorytracker.onboarding_presentation.age.AgeEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.gender.GenderPickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.welcome.WelcomeScreen
 
@@ -21,39 +28,49 @@ class MainActivity : ComponentActivity() {
         setContent {
             CaloryTrackerTheme {
                 val navController = rememberNavController()
-                NavHost(
-                    navController = navController,
-                    startDestination = Route.ONBOARDING_WELCOME,
+                val scaffoldState = rememberScaffoldState()
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    scaffoldState = scaffoldState,
                 ) {
-                    composable(route = Route.ONBOARDING_WELCOME) {
-                        WelcomeScreen(onNavigate = navController::navigate)
-                    }
-                    composable(route = Route.ONBOARDING_GENDER) {
-                        GenderPickerScreen(onNavigate = navController::navigate)
-                    }
-                    composable(route = Route.ONBOARDING_AGE) {
+                    NavHost(
+                        modifier = Modifier.padding(it),
+                        navController = navController,
+                        startDestination = Route.ONBOARDING_WELCOME,
+                    ) {
+                        composable(route = Route.ONBOARDING_WELCOME) {
+                            WelcomeScreen(onNavigate = navController::navigate)
+                        }
+                        composable(route = Route.ONBOARDING_GENDER) {
+                            GenderPickerScreen(onNavigate = navController::navigate)
+                        }
+                        composable(route = Route.ONBOARDING_AGE) {
+                            AgeEnterScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate,
+                            )
+                        }
+                        composable(route = Route.ONBOARDING_HEIGHT) {
 
-                    }
-                    composable(route = Route.ONBOARDING_HEIGHT) {
+                        }
+                        composable(route = Route.ONBOARDING_WEIGHT) {
 
-                    }
-                    composable(route = Route.ONBOARDING_WEIGHT) {
+                        }
+                        composable(route = Route.ONBOARDING_NUTRIENT_GOAL) {
 
-                    }
-                    composable(route = Route.ONBOARDING_NUTRIENT_GOAL) {
+                        }
+                        composable(route = Route.ONBOARDING_ACTIVITY) {
 
-                    }
-                    composable(route = Route.ONBOARDING_ACTIVITY) {
+                        }
+                        composable(route = Route.ONBOARDING_GOAL) {
 
-                    }
-                    composable(route = Route.ONBOARDING_GOAL) {
+                        }
+                        composable(route = Route.TRACKER_OVERVIEW) {
 
-                    }
-                    composable(route = Route.TRACKER_OVERVIEW) {
+                        }
+                        composable(route = Route.TRACKER_SEARCH) {
 
-                    }
-                    composable(route = Route.TRACKER_SEARCH) {
-
+                        }
                     }
                 }
             }
