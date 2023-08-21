@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.onboarding_presentation.feature.age
+package kz.btokmyrza.calorytracker.onboarding_presentation.feature.height
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,9 +26,9 @@ import kz.btokmyrza.calorytracker.onboarding_presentation.common.components.Acti
 import kz.btokmyrza.calorytracker.onboarding_presentation.common.components.UnitTextField
 
 @Composable
-fun AgeEnterScreen(
+fun HeightEnterScreen(
     scaffoldState: ScaffoldState,
-    viewModel: AgeEnterViewModel = hiltViewModel(),
+    viewModel: HeightEnterViewModel = hiltViewModel(),
     onNavigate: (UiEvent.Navigate) -> Unit,
 ) {
     val context = LocalContext.current
@@ -43,17 +43,17 @@ fun AgeEnterScreen(
             }
         }
     }
-    AgeEnterScreenContent(
-        age = viewModel.age,
-        onAgeEnter = viewModel::onAgeChanged,
+    HeightEnterScreenContent(
+        height = viewModel.height,
+        onHeightEnter = viewModel::onHeightChanged,
         onNextClick =viewModel::onNextClick,
     )
 }
 
 @Composable
-private fun AgeEnterScreenContent(
-    age: String,
-    onAgeEnter: (String) -> Unit,
+private fun HeightEnterScreenContent(
+    height: String,
+    onHeightEnter: (String) -> Unit,
     onNextClick: () -> Unit,
 ) {
     val spacing = LocalSpacing.current
@@ -68,14 +68,14 @@ private fun AgeEnterScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(id = R.string.whats_your_age),
+                text = stringResource(id = R.string.whats_your_height),
                 style = MaterialTheme.typography.h3
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
             UnitTextField(
-                value = age,
-                unitName = stringResource(id = R.string.years),
-                onValueChange = onAgeEnter
+                value = height,
+                unitName = stringResource(id = R.string.cm),
+                onValueChange = onHeightEnter
             )
         }
         ActionButton(
@@ -88,11 +88,11 @@ private fun AgeEnterScreenContent(
 
 @Preview(showSystemUi = true)
 @Composable
-private fun AgeEnterScreenPreview() {
+private fun HeightEnterScreenPreview() {
     CaloryTrackerTheme {
-        AgeEnterScreenContent(
-            age = "20",
-            onAgeEnter = {},
+        HeightEnterScreenContent(
+            height = "171",
+            onHeightEnter = {},
             onNextClick = {},
         )
     }

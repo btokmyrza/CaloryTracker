@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -18,6 +17,7 @@ import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.navigation.navigate
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.age.AgeEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.gender.GenderPickerScreen
+import kz.btokmyrza.calorytracker.onboarding_presentation.feature.height.HeightEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.welcome.WelcomeScreen
 
 @AndroidEntryPoint
@@ -51,7 +51,10 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(route = Route.ONBOARDING_HEIGHT) {
-
+                            HeightEnterScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate,
+                            )
                         }
                         composable(route = Route.ONBOARDING_WEIGHT) {
 
