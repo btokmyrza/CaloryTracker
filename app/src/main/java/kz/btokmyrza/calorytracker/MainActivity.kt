@@ -9,17 +9,18 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kz.btokmyrza.calorytracker.core.navigation.Route
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.navigation.navigate
+import kz.btokmyrza.calorytracker.navigation.screen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.activity_level.ActivityLevelPickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.age.AgeEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.gender.GenderPickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.goal_type.GoalTypePickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.height.HeightEnterScreen
+import kz.btokmyrza.calorytracker.onboarding_presentation.feature.nutrient_goal.NutrientGoalScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.weight.WeightEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.welcome.WelcomeScreen
 
@@ -41,43 +42,46 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = Route.ONBOARDING_WELCOME,
                     ) {
-                        composable(route = Route.ONBOARDING_WELCOME) {
+                        screen(route = Route.ONBOARDING_WELCOME) {
                             WelcomeScreen(onNavigate = navController::navigate)
                         }
-                        composable(route = Route.ONBOARDING_GENDER) {
+                        screen(route = Route.ONBOARDING_GENDER) {
                             GenderPickerScreen(onNavigate = navController::navigate)
                         }
-                        composable(route = Route.ONBOARDING_AGE) {
+                        screen(route = Route.ONBOARDING_AGE) {
                             AgeEnterScreen(
                                 scaffoldState = scaffoldState,
                                 onNavigate = navController::navigate,
                             )
                         }
-                        composable(route = Route.ONBOARDING_HEIGHT) {
+                        screen(route = Route.ONBOARDING_HEIGHT) {
                             HeightEnterScreen(
                                 scaffoldState = scaffoldState,
                                 onNavigate = navController::navigate,
                             )
                         }
-                        composable(route = Route.ONBOARDING_WEIGHT) {
+                        screen(route = Route.ONBOARDING_WEIGHT) {
                             WeightEnterScreen(
                                 scaffoldState = scaffoldState,
                                 onNavigate = navController::navigate,
                             )
                         }
-                        composable(route = Route.ONBOARDING_ACTIVITY_LEVEL) {
+                        screen(route = Route.ONBOARDING_ACTIVITY_LEVEL) {
                             ActivityLevelPickerScreen(onNavigate = navController::navigate)
                         }
-                        composable(route = Route.ONBOARDING_GOAL) {
+                        screen(route = Route.ONBOARDING_GOAL) {
                             GoalTypePickerScreen(onNavigate = navController::navigate)
                         }
-                        composable(route = Route.ONBOARDING_NUTRIENT_GOAL) {
+                        screen(route = Route.ONBOARDING_NUTRIENT_GOAL) {
+                            NutrientGoalScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate,
+                            )
+                        }
+                        screen(route = Route.TRACKER_OVERVIEW) {
 
                         }
-                        composable(route = Route.TRACKER_OVERVIEW) {
-
-                        }
-                        composable(route = Route.TRACKER_SEARCH) {
+                        screen(route = Route.TRACKER_SEARCH) {
 
                         }
                     }
