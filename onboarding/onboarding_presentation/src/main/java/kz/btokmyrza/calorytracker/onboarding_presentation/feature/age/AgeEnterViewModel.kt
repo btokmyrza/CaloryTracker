@@ -18,6 +18,7 @@ import kz.btokmyrza.calorytracker.core.util.UiText
 import javax.inject.Inject
 
 private const val INITIAL_AGE_VALUE = "20"
+private const val MAX_AGE_LENGTH = 3
 
 @HiltViewModel
 class AgeEnterViewModel @Inject constructor(
@@ -32,7 +33,7 @@ class AgeEnterViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun onAgeChanged(age: String) {
-        if (age.length <= 3) {
+        if (age.length <= MAX_AGE_LENGTH) {
             this.age = filterOutDigits(age)
         }
     }
