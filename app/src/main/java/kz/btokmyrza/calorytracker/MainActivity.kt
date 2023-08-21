@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kz.btokmyrza.calorytracker.core.navigation.Route
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.navigation.navigate
+import kz.btokmyrza.calorytracker.onboarding_presentation.feature.activity_level.ActivityLevelPickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.age.AgeEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.gender.GenderPickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.height.HeightEnterScreen
@@ -63,10 +64,10 @@ class MainActivity : ComponentActivity() {
                                 onNavigate = navController::navigate,
                             )
                         }
-                        composable(route = Route.ONBOARDING_NUTRIENT_GOAL) {
-
+                        composable(route = Route.ONBOARDING_ACTIVITY_LEVEL) {
+                            ActivityLevelPickerScreen(onNavigate = navController::navigate)
                         }
-                        composable(route = Route.ONBOARDING_ACTIVITY) {
+                        composable(route = Route.ONBOARDING_NUTRIENT_GOAL) {
 
                         }
                         composable(route = Route.ONBOARDING_GOAL) {

@@ -43,7 +43,7 @@ class WeightEnterViewModel @Inject constructor(
                 return@launch
             }
             preferences.saveWeight(weightNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.ONBOARDING_ACTIVITY))
+            _uiEvent.send(UiEvent.Navigate(Route.ONBOARDING_ACTIVITY_LEVEL))
         }
     }
 
