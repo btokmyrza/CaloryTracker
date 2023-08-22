@@ -24,14 +24,14 @@ object TrackerDataModule {
 
     @Provides
     @Singleton
+    fun provideMoshiConverterFactory(): MoshiConverterFactory = MoshiConverterFactory.create()
+
+    @Provides
+    @Singleton
     fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(interceptor)
             .build()
-
-    @Provides
-    @Singleton
-    fun provideMoshiConverterFactory(): MoshiConverterFactory = MoshiConverterFactory.create()
 
     @Provides
     @Singleton
