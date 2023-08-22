@@ -1,9 +1,12 @@
 package kz.btokmyrza.calorytracker.tracker_data.di
 
+import android.app.Application
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kz.btokmyrza.calorytracker.tracker_data.local.TrackerDatabase
 import kz.btokmyrza.calorytracker.tracker_data.network.OpenFoodAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -44,4 +47,14 @@ object TrackerDataModule {
         .client(client)
         .build()
         .create()
+
+    @Provides
+    @Singleton
+    fun provideTrackerDatabase(app: Application): TrackerDatabase {
+        return Room.databaseBuilder(
+            context = app,
+            klass = TrackerDatabase::class.java,
+            name = "tracker_db",
+        ).build()
+    }
 }
