@@ -15,9 +15,11 @@ import kotlinx.coroutines.launch
 import kz.btokmyrza.calorytracker.core.navigation.Route
 import kz.btokmyrza.calorytracker.core.preferences.Preferences
 import kz.btokmyrza.calorytracker.core.util.UiEvent
+import kz.btokmyrza.calorytracker.core.util.UiText
 import kz.btokmyrza.calorytracker.tracker_domain.use_case.TrackerUseCases
 import kz.btokmyrza.calorytracker.tracker_presentation.event.TrackerOverviewEvent
 import kz.btokmyrza.calorytracker.tracker_presentation.mapper.TrackedFoodDvoMapper
+import kz.btokmyrza.calorytracker.tracker_presentation.model.TrackedFoodDvo
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,49 +41,65 @@ class TrackerOverviewViewModel @Inject constructor(
         preferences.saveShouldShowOnboarding(false)
     }
 
-    fun onEvent(event: TrackerOverviewEvent) {
-        when (event) {
-            is TrackerOverviewEvent.OnAddFoodClick -> {
-                viewModelScope.launch {
-                    _uiEvent.send(
-                        UiEvent.Navigate(
-                            route = Route.TRACKER_SEARCH
-                                    + "/${event.meal.mealType.name}"
-                                    + "/${state.date.dayOfMonth}"
-                                    + "/${state.date.monthValue}"
-                                    + "/${state.date.year}",
-                        )
-                    )
-                }
-            }
-            is TrackerOverviewEvent.OnDeleteTrackedFoodClick -> {
-                viewModelScope.launch {
-                    trackedFoodDvoMapper.toTrackedFood(event.trackedFood).also {
-                        trackerUseCases.deleteTrackedFood(it)
-                    }
-                    refreshFoods()
-                }
-            }
-            is TrackerOverviewEvent.OnNextDayClick -> viewModelScope.launch {
-                state = state.copy(date = state.date.plusDays(1))
-                refreshFoods()
-            }
-            is TrackerOverviewEvent.OnPreviousDayClick -> viewModelScope.launch {
-                state = state.copy(date = state.date.minusDays(1))
-                refreshFoods()
-            }
-            is TrackerOverviewEvent.OnToggleMealClick -> {
-                state = state.copy(
-                    meals = state.meals.map {
-                        if (it.name == event.meal.name) {
-                            it.copy(isExpanded = !it.isExpanded)
-                        } else {
-                            it
-                        }
-                    }
+    fun onEvent(event: TrackerOverviewEvent) = when (event) {
+        is TrackerOverviewEvent.OnAddFoodClick -> onAddFoodClick(
+            mealTypeName = event.meal.mealType.name,
+        )
+        is TrackerOverviewEvent.OnDeleteTrackedFoodClick -> onDeleteTrackedFoodClick(
+            trackedFood = event.trackedFood,
+        )
+        is TrackerOverviewEvent.OnNextDayClick -> onNextDayClick()
+        is TrackerOverviewEvent.OnPreviousDayClick -> onPreviousDayClick()
+        is TrackerOverviewEvent.OnToggleMealClick -> onToggleMealClick(mealName = event.meal.name)
+    }
+
+    private fun onAddFoodClick(mealTypeName: String) {
+        viewModelScope.launch {
+            _uiEvent.send(
+                UiEvent.Navigate(
+                    route = Route.TRACKER_SEARCH
+                            + "/${mealTypeName}"
+                            + "/${state.date.dayOfMonth}"
+                            + "/${state.date.monthValue}"
+                            + "/${state.date.year}",
                 )
-            }
+            )
         }
+    }
+
+    private fun onDeleteTrackedFoodClick(trackedFood: TrackedFoodDvo) {
+        viewModelScope.launch {
+            trackedFoodDvoMapper.toTrackedFood(trackedFood).also {
+                trackerUseCases.deleteTrackedFood(it)
+            }
+            refreshFoods()
+        }
+    }
+
+    private fun onNextDayClick() {
+        viewModelScope.launch {
+            state = state.copy(date = state.date.plusDays(1))
+            refreshFoods()
+        }
+    }
+
+    private fun onPreviousDayClick() {
+        viewModelScope.launch {
+            state = state.copy(date = state.date.minusDays(1))
+            refreshFoods()
+        }
+    }
+
+    private fun onToggleMealClick(mealName: UiText) {
+        state = state.copy(
+            meals = state.meals.map {
+                if (it.name == mealName) {
+                    it.copy(isExpanded = it.isExpanded.not())
+                } else {
+                    it
+                }
+            },
+        )
     }
 
     private suspend fun refreshFoods() {
@@ -112,7 +130,7 @@ class TrackerOverviewViewModel @Inject constructor(
                         fat = nutrientsForMeal.fat,
                         calories = nutrientsForMeal.calories,
                     )
-                }
+                },
             )
         }.launchIn(viewModelScope)
     }
