@@ -7,7 +7,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kz.btokmyrza.calorytracker.tracker_data.local.TrackerDatabase
+import kz.btokmyrza.calorytracker.tracker_data.mapper.TrackedFoodModelMapper
 import kz.btokmyrza.calorytracker.tracker_data.network.OpenFoodAPI
+import kz.btokmyrza.calorytracker.tracker_data.repository.DefaultTrackerRepository
+import kz.btokmyrza.calorytracker.tracker_domain.repository.TrackerRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -57,4 +60,20 @@ object TrackerDataModule {
             name = "tracker_db",
         ).build()
     }
+
+    @Provides
+    @Singleton
+    fun provideTrackedFoodModelMapper() = TrackedFoodModelMapper()
+
+    @Provides
+    @Singleton
+    fun provideTrackerRepository(
+        api: OpenFoodAPI,
+        db: TrackerDatabase,
+        trackedFoodModelMapper: TrackedFoodModelMapper,
+    ): TrackerRepository = DefaultTrackerRepository(
+        dao = db.dao,
+        api = api,
+        trackedFoodModelMapper = trackedFoodModelMapper,
+    )
 }
