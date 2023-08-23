@@ -15,7 +15,10 @@ data class MealDvo(
     val fat: Int = 0,
     val calories: Int = 0,
     val isExpanded: Boolean = false,
-)
+) {
+
+    fun getMealTypeName(): String = mealType.name
+}
 
 val defaultMeals = listOf(
     MealDvo(

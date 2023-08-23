@@ -43,7 +43,7 @@ class TrackerOverviewViewModel @Inject constructor(
 
     fun onEvent(event: TrackerOverviewEvent) = when (event) {
         is TrackerOverviewEvent.OnAddFoodClick -> onAddFoodClick(
-            mealTypeName = event.meal.mealType.name,
+            mealTypeName = event.meal.getMealTypeName(),
         )
         is TrackerOverviewEvent.OnDeleteTrackedFoodClick -> onDeleteTrackedFoodClick(
             trackedFood = event.trackedFood,
