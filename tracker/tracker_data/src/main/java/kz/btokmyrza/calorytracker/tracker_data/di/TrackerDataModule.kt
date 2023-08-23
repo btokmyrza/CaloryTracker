@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.Dispatchers
 import kz.btokmyrza.calorytracker.tracker_data.local.TrackerDatabase
 import kz.btokmyrza.calorytracker.tracker_data.mapper.TrackedFoodModelMapper
 import kz.btokmyrza.calorytracker.tracker_data.network.OpenFoodAPI
@@ -72,6 +73,7 @@ object TrackerDataModule {
         db: TrackerDatabase,
         trackedFoodModelMapper: TrackedFoodModelMapper,
     ): TrackerRepository = DefaultTrackerRepository(
+        ioDispatcher = Dispatchers.IO,
         dao = db.dao,
         api = api,
         trackedFoodModelMapper = trackedFoodModelMapper,
