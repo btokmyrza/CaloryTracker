@@ -59,6 +59,13 @@ class DefaultPreferences(
         fatRatio = getFatRatio(),
     )
 
+    override fun saveShouldShowOnboarding(shouldShow: Boolean) = sharedPreferences.edit()
+        .putBoolean(Preferences.KEY_SHOULD_SHOW_ONBOARDING, shouldShow)
+        .apply()
+
+    override fun loadShouldShowOnboarding(): Boolean =
+        sharedPreferences.getBoolean(Preferences.KEY_SHOULD_SHOW_ONBOARDING, true)
+
     private fun getGender(): Gender = sharedPreferences
         .getString(Preferences.KEY_GENDER, null)
         .orEmpty()

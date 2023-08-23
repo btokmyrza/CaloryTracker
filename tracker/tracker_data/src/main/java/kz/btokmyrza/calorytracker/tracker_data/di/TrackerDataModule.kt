@@ -63,7 +63,6 @@ object TrackerDataModule {
     }
 
     @Provides
-    @Singleton
     fun provideTrackedFoodModelMapper() = TrackedFoodModelMapper()
 
     @Provides
