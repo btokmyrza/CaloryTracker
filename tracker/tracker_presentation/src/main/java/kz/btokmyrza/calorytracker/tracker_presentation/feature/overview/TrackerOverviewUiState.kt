@@ -35,4 +35,10 @@ data class TrackerOverviewUiState(
             else -> DateTimeFormatter.ofPattern(DATE_FORMAT).format(date)
         }
     }
+
+    fun getDay(): Int = date.dayOfMonth
+
+    fun getMonth(): Int = date.monthValue
+
+    fun getYear(): Int = date.year
 }
