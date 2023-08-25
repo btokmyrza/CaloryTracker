@@ -1,8 +1,10 @@
 package kz.btokmyrza.calorytracker.tracker_presentation.feature.overview
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -11,7 +13,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.core_ui.theme.LocalSpacing
+import kz.btokmyrza.calorytracker.tracker_presentation.event.TrackerOverviewEvent
+import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.ExpandableMeal
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.header.NutrientsHeader
+import kz.btokmyrza.calorytracker.tracker_presentation.model.MealDvo
 import kz.btokmyrza.calorytracker.tracker_presentation.model.defaultMeals
 import java.time.LocalDate
 
@@ -23,12 +28,14 @@ fun TrackerOverviewScreen(
     val uiState = viewModel.uiState
     TrackerOverviewScreenContent(
         uiState = uiState,
+        onToggleMealClick = { viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(it)) },
     )
 }
 
 @Composable
 private fun TrackerOverviewScreenContent(
-    uiState: TrackerOverviewUiState
+    uiState: TrackerOverviewUiState,
+    onToggleMealClick: (MealDvo) -> Unit,
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
@@ -40,10 +47,20 @@ private fun TrackerOverviewScreenContent(
         item {
             NutrientsHeader(uiState = uiState)
         }
+        items(uiState.meals) { meal ->
+            ExpandableMeal(
+                modifier = Modifier.fillMaxWidth(),
+                meal = meal,
+                onToggleClick = { onToggleMealClick(meal) },
+                content = {
+
+                },
+            )
+        }
     }
 }
 
-@Preview(showSystemUi = true)
+@Preview(showBackground = true, heightDp = 900)
 @Composable
 private fun TrackerOverviewScreenPreview() {
     CaloryTrackerTheme {
@@ -61,6 +78,7 @@ private fun TrackerOverviewScreenPreview() {
                 trackedFoods = emptyList(),
                 meals = defaultMeals,
             ),
+            onToggleMealClick = {},
         )
     }
 }
