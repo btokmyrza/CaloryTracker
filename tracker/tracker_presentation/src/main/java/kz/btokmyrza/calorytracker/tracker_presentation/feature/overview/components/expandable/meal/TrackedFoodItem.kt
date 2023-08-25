@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components
+package kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.expandable.meal
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

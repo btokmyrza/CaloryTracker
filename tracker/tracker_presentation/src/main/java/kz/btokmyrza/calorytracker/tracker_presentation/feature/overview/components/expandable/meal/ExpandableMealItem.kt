@@ -15,7 +15,6 @@ import kz.btokmyrza.calorytracker.core.R
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.core_ui.theme.LocalSpacing
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.AddButton
-import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.TrackedFoodItem
 import kz.btokmyrza.calorytracker.tracker_presentation.model.MealDvo
 import kz.btokmyrza.calorytracker.tracker_presentation.model.TrackedFoodDvo
 
