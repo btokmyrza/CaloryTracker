@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components
+package kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.expandable.meal
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
@@ -15,9 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,18 +22,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kz.btokmyrza.calorytracker.core.R
-import kz.btokmyrza.calorytracker.core.util.UiText
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.core_ui.theme.LocalSpacing
-import kz.btokmyrza.calorytracker.tracker_domain.model.MealType
 import kz.btokmyrza.calorytracker.tracker_presentation.common.components.NutrientInfo
 import kz.btokmyrza.calorytracker.tracker_presentation.common.components.UnitDisplay
 import kz.btokmyrza.calorytracker.tracker_presentation.model.MealDvo
 
 @Composable
-internal fun ExpandableMeal(
+internal fun ExpandableMealWidget(
     modifier: Modifier = Modifier,
     meal: MealDvo,
     onToggleClick: () -> Unit,
@@ -67,16 +63,8 @@ internal fun ExpandableMeal(
                         style = MaterialTheme.typography.h3,
                     )
                     Icon(
-                        imageVector = if (meal.isExpanded) {
-                            Icons.Default.KeyboardArrowUp
-                        } else {
-                            Icons.Default.KeyboardArrowDown
-                        },
-                        contentDescription = if (meal.isExpanded) {
-                            stringResource(id = R.string.collapse)
-                        } else {
-                            stringResource(id = R.string.extend)
-                        }
+                        imageVector = meal.getArrowDirectionImage(),
+                        contentDescription = meal.getArrowDirectionContentDescription(),
                     )
                 }
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))
@@ -87,7 +75,7 @@ internal fun ExpandableMeal(
                     UnitDisplay(
                         amount = meal.calories,
                         unit = stringResource(id = R.string.kcal),
-                        amountTextSize = 30.sp
+                        amountTextSize = 30.sp,
                     )
                     Row {
                         NutrientInfo(
@@ -123,19 +111,31 @@ internal fun ExpandableMeal(
 @Composable
 private fun ExpandableMealPreview() {
     CaloryTrackerTheme {
-        ExpandableMeal(
-            meal = MealDvo(
-                name = UiText.StringResource(R.string.breakfast),
-                drawableRes = R.drawable.ic_breakfast,
-                mealType = MealType.Breakfast,
-                carbs = 40,
-                protein = 30,
-                fat = 30,
-                calories = 100,
-                isExpanded = false,
-            ),
+        ExpandableMealWidget(
+            modifier = Modifier.padding(8.dp),
+            meal = stubMealBreakfast,
             onToggleClick = {},
             content = {},
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ExpandableMealExpandedPreview() {
+    CaloryTrackerTheme {
+        ExpandableMealWidget(
+            modifier = Modifier.padding(8.dp),
+            meal = stubMealBreakfast.copy(isExpanded = true),
+            onToggleClick = {},
+            content = {
+                ExpandableMealItem(
+                    trackedFoods = stubTrackedFoods,
+                    meal = stubMealBreakfast,
+                    onDeleteTrackedFoodClick = {},
+                    onAddFoodClick = {},
+                )
+            },
         )
     }
 }
