@@ -88,7 +88,7 @@ private fun TrackerOverviewScreenContent(
     }
 }
 
-@Preview(showBackground = true, heightDp = 900)
+@Preview(showBackground = true, heightDp = 1000)
 @Composable
 private fun TrackerOverviewScreenPreview() {
     CaloryTrackerTheme {
