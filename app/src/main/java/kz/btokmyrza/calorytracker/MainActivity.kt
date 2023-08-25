@@ -23,6 +23,7 @@ import kz.btokmyrza.calorytracker.onboarding_presentation.feature.height.HeightE
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.nutrient_goal.NutrientGoalScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.weight.WeightEnterScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.welcome.WelcomeScreen
+import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.TrackerOverviewScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -79,7 +80,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         screen(route = Route.TRACKER_OVERVIEW) {
-
+                            TrackerOverviewScreen(onNavigate = navController::navigate)
                         }
                         screen(route = Route.TRACKER_SEARCH) {
 

@@ -12,10 +12,10 @@ import kz.btokmyrza.calorytracker.tracker_data.local.model.TrackedFoodEntity
 interface TrackerDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTrackedFood(trackedFoodEntity: TrackedFoodEntity)
+    fun insertTrackedFood(trackedFoodEntity: TrackedFoodEntity)
 
     @Delete
-    suspend fun deleteTrackedFood(trackedFoodEntity: TrackedFoodEntity)
+    fun deleteTrackedFood(trackedFoodEntity: TrackedFoodEntity)
 
     @Query(
         """
