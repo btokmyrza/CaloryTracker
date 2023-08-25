@@ -1,7 +1,9 @@
 package kz.btokmyrza.calorytracker.tracker_presentation.feature.overview
 
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,6 +15,7 @@ import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.core_ui.theme.LocalSpacing
 import kz.btokmyrza.calorytracker.tracker_presentation.event.TrackerOverviewEvent
+import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.DaySelector
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.expandable.meal.ExpandableMealItem
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.expandable.meal.ExpandableMealWidget
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.header.NutrientsHeader
@@ -29,6 +32,8 @@ fun TrackerOverviewScreen(
     val uiState = viewModel.uiState
     TrackerOverviewScreenContent(
         uiState = uiState,
+        onPreviousDayClick = { viewModel.onEvent(TrackerOverviewEvent.OnPreviousDayClick) },
+        onNextDayClick = { viewModel.onEvent(TrackerOverviewEvent.OnNextDayClick) },
         onToggleMealClick = { viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(it)) },
         onDeleteTrackedFoodClick = {
             viewModel.onEvent(TrackerOverviewEvent.OnDeleteTrackedFoodClick(it))
@@ -40,6 +45,8 @@ fun TrackerOverviewScreen(
 @Composable
 private fun TrackerOverviewScreenContent(
     uiState: TrackerOverviewUiState,
+    onPreviousDayClick: () -> Unit,
+    onNextDayClick: () -> Unit,
     onToggleMealClick: (MealDvo) -> Unit,
     onDeleteTrackedFoodClick: (TrackedFoodDvo) -> Unit,
     onAddFoodClick: (MealDvo) -> Unit,
@@ -52,6 +59,16 @@ private fun TrackerOverviewScreenContent(
     ) {
         item {
             NutrientsHeader(uiState = uiState)
+            Spacer(modifier = Modifier.height(spacing.spaceMedium))
+            DaySelector(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = spacing.spaceMedium),
+                date = uiState.getFormattedDate(),
+                onPreviousDayClick = onPreviousDayClick,
+                onNextDayClick = onNextDayClick,
+            )
+            Spacer(modifier = Modifier.height(spacing.spaceMedium))
         }
         items(uiState.meals) { meal ->
             ExpandableMealWidget(
@@ -89,6 +106,8 @@ private fun TrackerOverviewScreenPreview() {
                 trackedFoods = emptyList(),
                 meals = defaultMeals,
             ),
+            onPreviousDayClick = {},
+            onNextDayClick = {},
             onToggleMealClick = {},
             onDeleteTrackedFoodClick = {},
             onAddFoodClick = {},
