@@ -14,7 +14,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.core_ui.theme.LocalSpacing
-import kz.btokmyrza.calorytracker.tracker_presentation.event.TrackerOverviewEvent
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.DaySelector
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.expandable.meal.ExpandableMealItem
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.expandable.meal.ExpandableMealWidget

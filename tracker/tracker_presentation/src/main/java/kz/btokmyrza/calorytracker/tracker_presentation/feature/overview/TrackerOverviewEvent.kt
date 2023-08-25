@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.tracker_presentation.event
+package kz.btokmyrza.calorytracker.tracker_presentation.feature.overview
 
 import kz.btokmyrza.calorytracker.tracker_presentation.model.MealDvo
 import kz.btokmyrza.calorytracker.tracker_presentation.model.TrackedFoodDvo

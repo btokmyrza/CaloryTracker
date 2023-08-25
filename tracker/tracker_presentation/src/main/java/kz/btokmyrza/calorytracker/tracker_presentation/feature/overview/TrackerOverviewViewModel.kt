@@ -17,7 +17,6 @@ import kz.btokmyrza.calorytracker.core.preferences.Preferences
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core.util.UiText
 import kz.btokmyrza.calorytracker.tracker_domain.use_case.TrackerUseCases
-import kz.btokmyrza.calorytracker.tracker_presentation.event.TrackerOverviewEvent
 import kz.btokmyrza.calorytracker.tracker_presentation.mapper.TrackedFoodDvoMapper
 import kz.btokmyrza.calorytracker.tracker_presentation.model.TrackedFoodDvo
 import javax.inject.Inject
