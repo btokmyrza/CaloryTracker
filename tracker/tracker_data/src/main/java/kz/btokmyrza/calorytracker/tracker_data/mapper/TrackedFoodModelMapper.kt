@@ -38,22 +38,15 @@ class TrackedFoodModelMapper {
         calories = from.calories,
     )
 
-    fun toTrackableFood(from: FoodSearchResponse): List<TrackableFood> = from.products
-        ?.map {
-            TrackableFood(
-                name = it.productName.orEmpty(),
-                carbsPer100g = it.nutriments?.carbohydrates100g?.roundToInt() ?: 0,
-                proteinPer100g = it.nutriments?.proteins100g?.roundToInt() ?: 0,
-                fatPer100g = it.nutriments?.fat100g?.roundToInt() ?: 0,
-                caloriesPer100g = it.nutriments?.energyKcal100g?.roundToInt() ?: 0,
-                imageUrl = it.imageFrontThumbUrl,
-            )
-        }
-        ?.filter {
-            val calculatedCalories =
-                it.caloriesPer100g * 4f + it.proteinPer100g * 4f + it.fatPer100g * 9f
-            val lowerBound = calculatedCalories * 0.99f
-            val upperBound = calculatedCalories * 1.01f
-            it.caloriesPer100g.toFloat() in (lowerBound..upperBound)
-        }.orEmpty()
+    fun toTrackableFood(from: FoodSearchResponse): List<TrackableFood> = from.products?.map {
+        val nutriments = it.nutriments
+        TrackableFood(
+            name = it.productName.orEmpty(),
+            carbsPer100g = nutriments?.carbohydrates100g?.roundToInt() ?: 0,
+            proteinPer100g = nutriments?.proteins100g?.roundToInt() ?: 0,
+            fatPer100g = nutriments?.fat100g?.roundToInt() ?: 0,
+            caloriesPer100g = nutriments?.energyKcal100g?.roundToInt() ?: 0,
+            imageUrl = it.imageFrontThumbUrl,
+        )
+    }.orEmpty()
 }

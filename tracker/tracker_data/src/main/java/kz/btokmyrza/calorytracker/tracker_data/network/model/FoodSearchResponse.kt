@@ -2,12 +2,12 @@ package kz.btokmyrza.calorytracker.tracker_data.network.model
 
 import com.squareup.moshi.Json
 
-class FoodSearchResponse(
+data class FoodSearchResponse(
     @field:Json(name = "products")
     val products: List<ProductResponse>? = null,
 ) {
 
-    class ProductResponse(
+    data class ProductResponse(
         @field:Json(name = "image_front_thumb_url")
         val imageFrontThumbUrl: String? = null,
         @field:Json(name = "nutriments")
@@ -16,7 +16,7 @@ class FoodSearchResponse(
         val productName: String? = null,
     )
 
-    class NutrimentsResponse(
+    data class NutrimentsResponse(
         @field:Json(name = "carbohydrates_100g")
         val carbohydrates100g: Double? = null,
         @field:Json(name = "energy-kcal_100g")
