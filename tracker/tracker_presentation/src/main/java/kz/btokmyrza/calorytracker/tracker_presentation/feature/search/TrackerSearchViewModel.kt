@@ -58,7 +58,7 @@ class TrackerSearchViewModel @Inject constructor(
 
     private fun onAmountForFoodChange(food: TrackableFoodDvo, amount: String) {
         uiState = uiState.copy(
-            trackableFood = uiState.trackableFood.map {
+            trackableFoods = uiState.trackableFoods.map {
                 if (it.food == food) it.copy(amount = filterOutDigits(amount)) else it
             },
         )
@@ -68,7 +68,7 @@ class TrackerSearchViewModel @Inject constructor(
         viewModelScope.launch {
             uiState = uiState.copy(
                 isSearching = true,
-                trackableFood = emptyList(),
+                trackableFoods = emptyList(),
             )
             trackerUseCases
                 .searchFood(query = uiState.query)
@@ -79,7 +79,7 @@ class TrackerSearchViewModel @Inject constructor(
 
     private fun onSearchSuccess(foods: List<TrackableFood>) {
         uiState = uiState.copy(
-            trackableFood = foods.map {
+            trackableFoods = foods.map {
                 TrackerSearchUiState.TrackableFoodItem(
                     food = trackedFoodDvoMapper.toTrackableFoodDvo(it),
                 )
@@ -100,7 +100,7 @@ class TrackerSearchViewModel @Inject constructor(
 
     private fun onToggleTrackableFood(food: TrackableFoodDvo) {
         uiState = uiState.copy(
-            trackableFood = uiState.trackableFood.map {
+            trackableFoods = uiState.trackableFoods.map {
                 if (it.food == food) it.copy(isExpanded = it.isExpanded.not()) else it
             },
         )
@@ -123,11 +123,11 @@ class TrackerSearchViewModel @Inject constructor(
     }
 
     private fun getTrackableFoodOrNull(food: TrackableFoodDvo): TrackableFood? =
-        uiState.trackableFood
+        uiState.trackableFoods
             .find { it.food == food }
             ?.food
             ?.let(trackedFoodDvoMapper::toTrackableFood)
 
-    private fun getTrackableFoodAmountOrNull(food: TrackableFoodDvo): Int? = uiState.trackableFood
+    private fun getTrackableFoodAmountOrNull(food: TrackableFoodDvo): Int? = uiState.trackableFoods
         .find { it.food == food }?.amount?.toIntOrNull()
 }
