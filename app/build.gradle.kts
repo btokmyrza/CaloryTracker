@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "kz.btokmyrza.calorytracker"
+    namespace = ProjectConfig.namespace
     compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
