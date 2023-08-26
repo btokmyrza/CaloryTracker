@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
+import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -16,9 +17,11 @@ fun NavController.navigate(event: UiEvent.Navigate) {
 
 fun NavGraphBuilder.screen(
     route: String,
+    arguments: List<NamedNavArgument> = emptyList(),
     content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit,
 ) = this.composable(
     route = route,
+    arguments = arguments,
     enterTransition = {
         slideIntoContainer(
             towards = AnimatedContentTransitionScope.SlideDirection.Right,

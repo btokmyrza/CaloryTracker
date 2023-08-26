@@ -4,24 +4,24 @@ import kz.btokmyrza.calorytracker.tracker_domain.model.MealType
 import kz.btokmyrza.calorytracker.tracker_presentation.model.TrackableFoodDvo
 import java.time.LocalDate
 
-sealed class SearchEvent {
+sealed class TrackerSearchEvent {
 
-    data class OnQueryChange(val query: String) : SearchEvent()
+    data class OnQueryChange(val query: String) : TrackerSearchEvent()
 
-    data object OnSearch : SearchEvent()
+    data object OnSearch : TrackerSearchEvent()
 
-    data class OnToggleTrackableFood(val food: TrackableFoodDvo) : SearchEvent()
+    data class OnToggleTrackableFood(val food: TrackableFoodDvo) : TrackerSearchEvent()
 
     data class OnAmountForFoodChange(
         val food: TrackableFoodDvo,
         val amount: String,
-    ) : SearchEvent()
+    ) : TrackerSearchEvent()
 
     data class OnTrackFoodClick(
         val food: TrackableFoodDvo,
         val mealType: MealType,
         val date: LocalDate,
-    ) : SearchEvent()
+    ) : TrackerSearchEvent()
 
-    data class OnSearchFocusChange(val isFocused: Boolean) : SearchEvent()
+    data class OnSearchFocusChange(val isFocused: Boolean) : TrackerSearchEvent()
 }

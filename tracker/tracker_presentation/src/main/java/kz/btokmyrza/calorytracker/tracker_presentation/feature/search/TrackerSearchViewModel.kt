@@ -34,16 +34,18 @@ class TrackerSearchViewModel @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onEvent(event: SearchEvent) = when (event) {
-        is SearchEvent.OnQueryChange -> onQueryChange(query = event.query)
-        is SearchEvent.OnAmountForFoodChange -> onAmountForFoodChange(
+    fun onEvent(event: TrackerSearchEvent) = when (event) {
+        is TrackerSearchEvent.OnQueryChange -> onQueryChange(query = event.query)
+        is TrackerSearchEvent.OnAmountForFoodChange -> onAmountForFoodChange(
             food = event.food,
             amount = event.amount,
         )
-        is SearchEvent.OnSearch -> onSearch()
-        is SearchEvent.OnToggleTrackableFood -> onToggleTrackableFood(food = event.food)
-        is SearchEvent.OnSearchFocusChange -> onSearchFocusChange(isFocused = event.isFocused)
-        is SearchEvent.OnTrackFoodClick -> onTrackFoodClick(
+        is TrackerSearchEvent.OnSearch -> onSearch()
+        is TrackerSearchEvent.OnToggleTrackableFood -> onToggleTrackableFood(food = event.food)
+        is TrackerSearchEvent.OnSearchFocusChange -> onSearchFocusChange(
+            isFocused = event.isFocused,
+        )
+        is TrackerSearchEvent.OnTrackFoodClick -> onTrackFoodClick(
             food = event.food,
             mealType = event.mealType,
             date = event.date,
