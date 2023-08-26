@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import kz.btokmyrza.calorytracker.core.navigation.Route
+import kz.btokmyrza.calorytracker.core.preferences.Preferences
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.navigation.navigate
 import kz.btokmyrza.calorytracker.navigation.screen
@@ -27,12 +28,17 @@ import kz.btokmyrza.calorytracker.onboarding_presentation.feature.weight.WeightE
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.welcome.WelcomeScreen
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.TrackerOverviewScreen
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.search.TrackerSearchScreen
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    @Inject
+    lateinit var preferences: Preferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val shouldShowOnboarding = preferences.loadShouldShowOnboarding()
         setContent {
             CaloryTrackerTheme {
                 val navController = rememberNavController()
@@ -44,7 +50,11 @@ class MainActivity : ComponentActivity() {
                     NavHost(
                         modifier = Modifier.padding(paddingValues),
                         navController = navController,
-                        startDestination = Route.ONBOARDING_WELCOME,
+                        startDestination = if (shouldShowOnboarding) {
+                            Route.ONBOARDING_WELCOME
+                        } else {
+                            Route.TRACKER_OVERVIEW
+                        },
                     ) {
                         screen(route = Route.ONBOARDING_WELCOME) {
                             WelcomeScreen(onNavigate = navController::navigate)

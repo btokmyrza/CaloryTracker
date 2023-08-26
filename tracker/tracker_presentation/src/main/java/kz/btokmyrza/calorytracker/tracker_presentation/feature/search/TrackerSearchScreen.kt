@@ -67,7 +67,10 @@ fun TrackerSearchScreen(
         uiState = uiState,
         mealName = mealName,
         onQueryChange = { viewModel.onEvent(TrackerSearchEvent.OnQueryChange(query = it)) },
-        onSearch = { viewModel.onEvent(TrackerSearchEvent.OnSearch) },
+        onSearch = {
+            keyboardController?.hide()
+            viewModel.onEvent(TrackerSearchEvent.OnSearch)
+        },
         onSearchFocusChange = {
             viewModel.onEvent(TrackerSearchEvent.OnSearchFocusChange(isFocused = it.isFocused))
         },
@@ -83,6 +86,7 @@ fun TrackerSearchScreen(
             )
         },
         onTrackFoodClick = { trackableFoodItem ->
+            keyboardController?.hide()
             viewModel.onEvent(
                 TrackerSearchEvent.OnTrackFoodClick(
                     food = trackableFoodItem.food,
@@ -118,6 +122,7 @@ private fun TrackerSearchScreenContent(
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
         SearchTextField(
             text = uiState.query,
+            shouldShowHint = uiState.isHintVisible,
             onValueChange = onQueryChange,
             onSearch = onSearch,
             onFocusChanged = onSearchFocusChange,
