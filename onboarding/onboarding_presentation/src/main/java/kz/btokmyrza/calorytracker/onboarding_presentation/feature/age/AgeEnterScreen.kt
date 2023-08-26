@@ -29,13 +29,13 @@ import kz.btokmyrza.calorytracker.onboarding_presentation.common.components.Unit
 fun AgeEnterScreen(
     scaffoldState: ScaffoldState,
     viewModel: AgeEnterViewModel = hiltViewModel(),
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Success -> onNextClick()
                 is UiEvent.ShowSnackbar -> scaffoldState.snackbarHostState.showSnackbar(
                     message = event.message.asString(context),
                 )

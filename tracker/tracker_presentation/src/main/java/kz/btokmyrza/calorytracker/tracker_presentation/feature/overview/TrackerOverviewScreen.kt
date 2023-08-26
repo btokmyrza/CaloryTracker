@@ -8,12 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.core_ui.theme.LocalSpacing
 import kz.btokmyrza.calorytracker.tracker_presentation.feature.overview.components.DaySelector
@@ -28,27 +26,26 @@ import java.time.LocalDate
 @Composable
 fun TrackerOverviewScreen(
     viewModel: TrackerOverviewViewModel = hiltViewModel(),
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNavigateToSearch: (String, Int, Int, Int) -> Unit,
 ) {
     val uiState = viewModel.uiState
     val context = LocalContext.current
-    LaunchedEffect(key1 = context) {
-        viewModel.uiEvent.collect { event ->
-            when(event) {
-                is UiEvent.Navigate -> onNavigate(event)
-                else -> Unit
-            }
-        }
-    }
     TrackerOverviewScreenContent(
         uiState = uiState,
         onPreviousDayClick = { viewModel.onEvent(TrackerOverviewEvent.OnPreviousDayClick) },
         onNextDayClick = { viewModel.onEvent(TrackerOverviewEvent.OnNextDayClick) },
         onToggleMealClick = { viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(it)) },
-        onDeleteTrackedFoodClick = {
-            viewModel.onEvent(TrackerOverviewEvent.OnDeleteTrackedFoodClick(it))
+        onDeleteTrackedFoodClick = { trackedFood ->
+            viewModel.onEvent(TrackerOverviewEvent.OnDeleteTrackedFoodClick(trackedFood))
         },
-        onAddFoodClick = { viewModel.onEvent(TrackerOverviewEvent.OnAddFoodClick(it)) },
+        onAddFoodClick = { meal ->
+            onNavigateToSearch(
+                meal.name.asString(context),
+                uiState.getDay(),
+                uiState.getMonth(),
+                uiState.getYear(),
+            )
+        },
     )
 }
 

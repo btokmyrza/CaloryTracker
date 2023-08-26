@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kz.btokmyrza.calorytracker.core.navigation.Route
 import kz.btokmyrza.calorytracker.core.preferences.Preferences
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core.util.UiText
@@ -44,29 +43,12 @@ class TrackerOverviewViewModel @Inject constructor(
     }
 
     fun onEvent(event: TrackerOverviewEvent) = when (event) {
-        is TrackerOverviewEvent.OnAddFoodClick -> onAddFoodClick(
-            mealTypeName = event.meal.getMealTypeName(),
-        )
         is TrackerOverviewEvent.OnDeleteTrackedFoodClick -> onDeleteTrackedFoodClick(
             trackedFood = event.trackedFood,
         )
         is TrackerOverviewEvent.OnNextDayClick -> onNextDayClick()
         is TrackerOverviewEvent.OnPreviousDayClick -> onPreviousDayClick()
         is TrackerOverviewEvent.OnToggleMealClick -> onToggleMealClick(mealName = event.meal.name)
-    }
-
-    private fun onAddFoodClick(mealTypeName: String) {
-        viewModelScope.launch {
-            _uiEvent.send(
-                UiEvent.Navigate(
-                    route = Route.TRACKER_SEARCH
-                            + "/${mealTypeName}"
-                            + "/${uiState.getDay()}"
-                            + "/${uiState.getMonth()}"
-                            + "/${uiState.getYear()}",
-                ),
-            )
-        }
     }
 
     private fun onDeleteTrackedFoodClick(trackedFood: TrackedFoodDvo) {
@@ -106,7 +88,7 @@ class TrackerOverviewViewModel @Inject constructor(
 
     private suspend fun refreshFoods() {
         getFoodsForDateJob?.cancel()
-        getFoodsForDateJob = trackerUseCases.getFoodsForDate(uiState.date).onEach { foods ->
+        getFoodsForDateJob = trackerUseCases.getFoodsForDate(date = uiState.date).onEach { foods ->
             val nutrientsResult = trackerUseCases.calculateMealNutrients(foods)
             uiState = uiState.copy(
                 totalCarbs = nutrientsResult.totalCarbs,

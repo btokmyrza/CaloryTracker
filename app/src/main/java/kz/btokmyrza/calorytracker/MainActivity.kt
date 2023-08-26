@@ -3,6 +3,7 @@ package kz.btokmyrza.calorytracker
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
@@ -13,10 +14,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
-import kz.btokmyrza.calorytracker.core.navigation.Route
 import kz.btokmyrza.calorytracker.core.preferences.Preferences
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
-import kz.btokmyrza.calorytracker.navigation.navigate
+import kz.btokmyrza.calorytracker.navigation.Route
 import kz.btokmyrza.calorytracker.navigation.screen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.activity_level.ActivityLevelPickerScreen
 import kz.btokmyrza.calorytracker.onboarding_presentation.feature.age.AgeEnterScreen
@@ -57,43 +57,69 @@ class MainActivity : ComponentActivity() {
                         },
                     ) {
                         screen(route = Route.ONBOARDING_WELCOME) {
-                            WelcomeScreen(onNavigate = navController::navigate)
+                            WelcomeScreen(
+                                onNextClick = { navController.navigate(Route.ONBOARDING_GENDER) },
+                            )
                         }
                         screen(route = Route.ONBOARDING_GENDER) {
-                            GenderPickerScreen(onNavigate = navController::navigate)
+                            GenderPickerScreen(
+                                onNextClick = { navController.navigate(Route.ONBOARDING_AGE) },
+                            )
                         }
                         screen(route = Route.ONBOARDING_AGE) {
                             AgeEnterScreen(
                                 scaffoldState = scaffoldState,
-                                onNavigate = navController::navigate,
+                                onNextClick = { navController.navigate(Route.ONBOARDING_HEIGHT) },
                             )
                         }
                         screen(route = Route.ONBOARDING_HEIGHT) {
                             HeightEnterScreen(
                                 scaffoldState = scaffoldState,
-                                onNavigate = navController::navigate,
+                                onNextClick = { navController.navigate(Route.ONBOARDING_WEIGHT) },
                             )
                         }
                         screen(route = Route.ONBOARDING_WEIGHT) {
                             WeightEnterScreen(
                                 scaffoldState = scaffoldState,
-                                onNavigate = navController::navigate,
+                                onNextClick = {
+                                    navController.navigate(Route.ONBOARDING_ACTIVITY_LEVEL)
+                                },
                             )
                         }
                         screen(route = Route.ONBOARDING_ACTIVITY_LEVEL) {
-                            ActivityLevelPickerScreen(onNavigate = navController::navigate)
+                            ActivityLevelPickerScreen(
+                                onNextClick = {
+                                    navController.navigate(Route.ONBOARDING_GOAL)
+                                },
+                            )
                         }
                         screen(route = Route.ONBOARDING_GOAL) {
-                            GoalTypePickerScreen(onNavigate = navController::navigate)
+                            GoalTypePickerScreen(
+                                onNextClick = {
+                                    navController.navigate(Route.ONBOARDING_NUTRIENT_GOAL)
+                                },
+                            )
                         }
                         screen(route = Route.ONBOARDING_NUTRIENT_GOAL) {
                             NutrientGoalScreen(
                                 scaffoldState = scaffoldState,
-                                onNavigate = navController::navigate,
+                                onNextClick = {
+                                    navController.navigate(Route.TRACKER_OVERVIEW)
+                                },
                             )
                         }
                         screen(route = Route.TRACKER_OVERVIEW) {
-                            TrackerOverviewScreen(onNavigate = navController::navigate)
+                            TrackerOverviewScreen(
+                                onNavigateToSearch = { mealName, day, month, year ->
+                                    navController.navigate(
+                                        Route.TRACKER_SEARCH
+                                                + "/$mealName"
+                                                + "/$day"
+                                                + "/$month"
+                                                + "/$year",
+                                    )
+                                },
+                            )
                         }
                         screen(
                             route = Route.TRACKER_SEARCH + Route.TRACKER_SEARCH_ARGS,
@@ -111,6 +137,7 @@ class MainActivity : ComponentActivity() {
                                     type = NavType.IntType
                                 },
                             ),
+                            direction = AnimatedContentTransitionScope.SlideDirection.Up,
                         ) {
                             TrackerSearchScreen(
                                 scaffoldState = scaffoldState,

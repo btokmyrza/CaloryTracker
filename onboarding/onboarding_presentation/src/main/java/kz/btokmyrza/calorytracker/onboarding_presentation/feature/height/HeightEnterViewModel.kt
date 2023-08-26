@@ -10,7 +10,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kz.btokmyrza.calorytracker.core.R
-import kz.btokmyrza.calorytracker.core.navigation.Route
 import kz.btokmyrza.calorytracker.core.preferences.Preferences
 import kz.btokmyrza.calorytracker.core.use_case.FilterOutDigits
 import kz.btokmyrza.calorytracker.core.util.UiEvent
@@ -45,7 +44,7 @@ class HeightEnterViewModel @Inject constructor(
                 return@launch
             }
             preferences.saveHeight(heightNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.ONBOARDING_WEIGHT))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 

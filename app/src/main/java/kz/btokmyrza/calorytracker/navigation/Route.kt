@@ -1,4 +1,4 @@
-package kz.btokmyrza.calorytracker.core.navigation
+package kz.btokmyrza.calorytracker.navigation
 
 object Route {
     const val ONBOARDING_WELCOME = "ONBOARDING_WELCOME"

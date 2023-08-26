@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val PARAM_SEARCH = "search_simple=1"
-private const val PARAM_JSON = "json=1"
+private const val PARAM_JSON = "json=true"
 private const val PARAM_ACTION = "action=process"
 private const val PARAM_FIELDS = "fields=product_name,nutriments,image_front_thumb_url"
 

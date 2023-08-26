@@ -9,7 +9,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kz.btokmyrza.calorytracker.core.navigation.Route
 import kz.btokmyrza.calorytracker.core.preferences.Preferences
 import kz.btokmyrza.calorytracker.core.use_case.FilterOutDigits
 import kz.btokmyrza.calorytracker.core.util.UiEvent
@@ -87,7 +86,7 @@ class NutrientGoalViewModel @Inject constructor(
     }
 
     private fun navigateToTrackerOverview() = viewModelScope.launch {
-        _uiEvent.send(UiEvent.Navigate(Route.TRACKER_OVERVIEW))
+        _uiEvent.send(UiEvent.Success)
     }
 
     private fun showErrorMessage(message: UiText) = viewModelScope.launch {
