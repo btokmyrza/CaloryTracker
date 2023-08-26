@@ -7,9 +7,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.core.use_case.FilterOutDigits
-import kz.btokmyrza.core_data.preferences.DefaultPreferences
+import kz.btokmyrza.core_data.preferences.DefaultUserPreferences
 import javax.inject.Singleton
 
 @Module
@@ -23,8 +23,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePreferences(sharedPreferences: SharedPreferences): Preferences =
-        DefaultPreferences(sharedPreferences = sharedPreferences)
+    fun providePreferences(sharedPreferences: SharedPreferences): UserPreferences =
+        DefaultUserPreferences(sharedPreferences = sharedPreferences)
 
     @Provides
     @Singleton

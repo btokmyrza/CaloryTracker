@@ -10,7 +10,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kz.btokmyrza.calorytracker.core.R
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core.util.UiText
 import javax.inject.Inject
@@ -20,7 +20,7 @@ private const val MAX_WEIGHT_LENGTH = 5
 
 @HiltViewModel
 class WeightEnterViewModel @Inject constructor(
-    private val preferences: Preferences,
+    private val userPreferences: UserPreferences,
 ) : ViewModel() {
 
     var weight by mutableStateOf(INITIAL_WEIGHT_VALUE)
@@ -41,7 +41,7 @@ class WeightEnterViewModel @Inject constructor(
                 showErrorMessage()
                 return@launch
             }
-            preferences.saveWeight(weightNumber)
+            userPreferences.saveWeight(weightNumber)
             _uiEvent.send(UiEvent.Success)
         }
     }

@@ -4,13 +4,13 @@ import kz.btokmyrza.calorytracker.core.model.ActivityLevel
 import kz.btokmyrza.calorytracker.core.model.Gender
 import kz.btokmyrza.calorytracker.core.model.GoalType
 import kz.btokmyrza.calorytracker.core.model.UserInfo
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.tracker_domain.model.MealType
 import kz.btokmyrza.calorytracker.tracker_domain.model.TrackedFood
 import kotlin.math.roundToInt
 
 class CalculateMealNutrients(
-    private val preferences: Preferences,
+    private val userPreferences: UserPreferences,
 ) {
 
     operator fun invoke(trackedFoods: List<TrackedFood>): Result {
@@ -32,7 +32,7 @@ class CalculateMealNutrients(
         val totalFat = allNutrients.values.sumOf { it.fat }
         val totalCalories = allNutrients.values.sumOf { it.calories }
 
-        val userInfo = preferences.loadUserInfo()
+        val userInfo = userPreferences.loadUserInfo()
         val caloryGoal = getDailyCaloryRequirement(userInfo)
         val carbsGoal = (caloryGoal * userInfo.carbRatio / 4f).roundToInt()
         val proteinGoal = (caloryGoal * userInfo.proteinRatio / 4f).roundToInt()

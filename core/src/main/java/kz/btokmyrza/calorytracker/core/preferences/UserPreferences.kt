@@ -5,7 +5,7 @@ import kz.btokmyrza.calorytracker.core.model.Gender
 import kz.btokmyrza.calorytracker.core.model.GoalType
 import kz.btokmyrza.calorytracker.core.model.UserInfo
 
-interface Preferences {
+interface UserPreferences {
 
     fun saveGender(gender: Gender)
 

@@ -10,13 +10,13 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kz.btokmyrza.calorytracker.core.model.GoalType
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import javax.inject.Inject
 
 @HiltViewModel
 class GoalTypePickerViewModel @Inject constructor(
-    private val preferences: Preferences,
+    private val userPreferences: UserPreferences,
 ) : ViewModel() {
 
     var selectedGoalType by mutableStateOf<GoalType>(GoalType.LoseWeight)
@@ -31,7 +31,7 @@ class GoalTypePickerViewModel @Inject constructor(
 
     fun onNextClick() {
         viewModelScope.launch {
-            preferences.saveGoalType(selectedGoalType)
+            userPreferences.saveGoalType(selectedGoalType)
             _uiEvent.send(UiEvent.Success)
         }
     }

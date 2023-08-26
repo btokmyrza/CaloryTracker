@@ -10,13 +10,13 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kz.btokmyrza.calorytracker.core.model.ActivityLevel
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import javax.inject.Inject
 
 @HiltViewModel
 class ActivityLevelPickerViewModel @Inject constructor(
-    private val preferences: Preferences,
+    private val userPreferences: UserPreferences,
 ) : ViewModel() {
 
     var selectedActivityLevel by mutableStateOf<ActivityLevel>(ActivityLevel.Medium)
@@ -31,7 +31,7 @@ class ActivityLevelPickerViewModel @Inject constructor(
 
     fun onNextClick() {
         viewModelScope.launch {
-            preferences.saveActivityLevel(selectedActivityLevel)
+            userPreferences.saveActivityLevel(selectedActivityLevel)
             _uiEvent.send(UiEvent.Success)
         }
     }

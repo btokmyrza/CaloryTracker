@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.core.use_case.FilterOutDigits
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core.util.UiText
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NutrientGoalViewModel @Inject constructor(
-    private val preferences: Preferences,
+    private val userPreferences: UserPreferences,
     private val filterOutDigits: FilterOutDigits,
     private val validateNutrients: ValidateNutrients,
 ) : ViewModel() {
@@ -79,7 +79,7 @@ class NutrientGoalViewModel @Inject constructor(
         carbsRatio: Float,
         proteinRatio: Float,
         fatRatio: Float,
-    ) = preferences.run {
+    ) = userPreferences.run {
         saveCarbRatio(carbsRatio)
         saveProteinRatio(proteinRatio)
         saveFatRatio(fatRatio)

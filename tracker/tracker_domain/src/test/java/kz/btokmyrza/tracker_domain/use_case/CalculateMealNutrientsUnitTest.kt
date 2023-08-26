@@ -7,7 +7,7 @@ import kz.btokmyrza.calorytracker.core.model.ActivityLevel
 import kz.btokmyrza.calorytracker.core.model.Gender
 import kz.btokmyrza.calorytracker.core.model.GoalType
 import kz.btokmyrza.calorytracker.core.model.UserInfo
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.tracker_domain.model.MealType
 import kz.btokmyrza.calorytracker.tracker_domain.model.TrackedFood
 import kz.btokmyrza.calorytracker.tracker_domain.use_case.CalculateMealNutrients
@@ -22,8 +22,8 @@ internal class CalculateMealNutrientsUnitTest {
 
     @Before
     fun setUp() {
-        val preferences = mockk<Preferences>(relaxed = true)
-        every { preferences.loadUserInfo() } returns UserInfo(
+        val userPreferences = mockk<UserPreferences>(relaxed = true)
+        every { userPreferences.loadUserInfo() } returns UserInfo(
             gender = Gender.Male,
             age = 20,
             weight = 80f,
@@ -34,7 +34,7 @@ internal class CalculateMealNutrientsUnitTest {
             proteinRatio = 0.3f,
             fatRatio = 0.3f,
         )
-        calculateMealNutrients = CalculateMealNutrients(preferences)
+        calculateMealNutrients = CalculateMealNutrients(userPreferences)
     }
 
     @Test

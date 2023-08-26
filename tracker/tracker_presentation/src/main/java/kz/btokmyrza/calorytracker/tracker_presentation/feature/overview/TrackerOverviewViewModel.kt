@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core.util.UiText
 import kz.btokmyrza.calorytracker.tracker_domain.use_case.TrackerUseCases
@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TrackerOverviewViewModel @Inject constructor(
-    preferences: Preferences,
+    userPreferences: UserPreferences,
     private val trackerUseCases: TrackerUseCases,
     private val trackedFoodDvoMapper: TrackedFoodDvoMapper,
 ) : ViewModel() {
@@ -39,7 +39,7 @@ class TrackerOverviewViewModel @Inject constructor(
         viewModelScope.launch {
             refreshFoods()
         }
-        preferences.saveShouldShowOnboarding(false)
+        userPreferences.saveShouldShowOnboarding(false)
     }
 
     fun onEvent(event: TrackerOverviewEvent) = when (event) {

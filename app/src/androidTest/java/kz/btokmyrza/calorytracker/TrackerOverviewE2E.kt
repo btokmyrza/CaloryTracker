@@ -32,7 +32,7 @@ import kz.btokmyrza.calorytracker.core.model.ActivityLevel
 import kz.btokmyrza.calorytracker.core.model.Gender
 import kz.btokmyrza.calorytracker.core.model.GoalType
 import kz.btokmyrza.calorytracker.core.model.UserInfo
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.core.use_case.FilterOutDigits
 import kz.btokmyrza.calorytracker.core_ui.theme.CaloryTrackerTheme
 import kz.btokmyrza.calorytracker.navigation.Route
@@ -65,7 +65,7 @@ internal class TrackerOverviewE2E {
 
     private lateinit var repositoryFake: FakeTrackerRepository
     private lateinit var trackerUseCases: TrackerUseCases
-    private lateinit var preferences: Preferences
+    private lateinit var userPreferences: UserPreferences
     private lateinit var trackerOverviewViewModel: TrackerOverviewViewModel
     private lateinit var searchViewModel: TrackerSearchViewModel
 
@@ -73,8 +73,8 @@ internal class TrackerOverviewE2E {
 
     @Before
     fun setUp() {
-        preferences = mockk(relaxed = true)
-        every { preferences.loadUserInfo() } returns UserInfo(
+        userPreferences = mockk(relaxed = true)
+        every { userPreferences.loadUserInfo() } returns UserInfo(
             gender = Gender.Male,
             age = 20,
             weight = 80f,
@@ -91,10 +91,10 @@ internal class TrackerOverviewE2E {
             searchFood = SearchFood(repositoryFake),
             getFoodsForDate = GetFoodsForDate(repositoryFake),
             deleteTrackedFood = DeleteTrackedFood(repositoryFake),
-            calculateMealNutrients = CalculateMealNutrients(preferences),
+            calculateMealNutrients = CalculateMealNutrients(userPreferences),
         )
         trackerOverviewViewModel = TrackerOverviewViewModel(
-            preferences = preferences,
+            userPreferences = userPreferences,
             trackerUseCases = trackerUseCases,
             trackedFoodDvoMapper = TrackedFoodDvoMapper(),
         )

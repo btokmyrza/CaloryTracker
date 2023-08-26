@@ -10,13 +10,13 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kz.btokmyrza.calorytracker.core.model.Gender
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import javax.inject.Inject
 
 @HiltViewModel
 class GenderPickerViewModel @Inject constructor(
-    private val preferences: Preferences,
+    private val userPreferences: UserPreferences,
 ) : ViewModel() {
 
     var selectedGender by mutableStateOf<Gender>(Gender.Male)
@@ -31,7 +31,7 @@ class GenderPickerViewModel @Inject constructor(
 
     fun onNextClick() {
         viewModelScope.launch {
-            preferences.saveGender(selectedGender)
+            userPreferences.saveGender(selectedGender)
             _uiEvent.send(UiEvent.Success)
         }
     }

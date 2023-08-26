@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.tracker_domain.repository.TrackerRepository
 import kz.btokmyrza.calorytracker.tracker_domain.use_case.CalculateMealNutrients
 import kz.btokmyrza.calorytracker.tracker_domain.use_case.DeleteTrackedFood
@@ -22,12 +22,12 @@ object TrackerDomainModule {
     @Provides
     fun provideTrackerUseCases(
         repository: TrackerRepository,
-        preferences: Preferences,
+        userPreferences: UserPreferences,
     ): TrackerUseCases = TrackerUseCases(
         trackFood = TrackFood(repository = repository),
         searchFood = SearchFood(repository = repository),
         getFoodsForDate = GetFoodsForDate(repository = repository),
         deleteTrackedFood = DeleteTrackedFood(repository = repository),
-        calculateMealNutrients = CalculateMealNutrients(preferences = preferences),
+        calculateMealNutrients = CalculateMealNutrients(userPreferences = userPreferences),
     )
 }

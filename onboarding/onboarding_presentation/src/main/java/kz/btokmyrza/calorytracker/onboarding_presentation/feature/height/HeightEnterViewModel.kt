@@ -10,7 +10,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kz.btokmyrza.calorytracker.core.R
-import kz.btokmyrza.calorytracker.core.preferences.Preferences
+import kz.btokmyrza.calorytracker.core.preferences.UserPreferences
 import kz.btokmyrza.calorytracker.core.use_case.FilterOutDigits
 import kz.btokmyrza.calorytracker.core.util.UiEvent
 import kz.btokmyrza.calorytracker.core.util.UiText
@@ -21,7 +21,7 @@ private const val MAX_HEIGHT_LENGTH = 3
 
 @HiltViewModel
 class HeightEnterViewModel @Inject constructor(
-    private val preferences: Preferences,
+    private val userPreferences: UserPreferences,
     private val filterOutDigits: FilterOutDigits,
 ) : ViewModel() {
 
@@ -43,7 +43,7 @@ class HeightEnterViewModel @Inject constructor(
                 showErrorMessage()
                 return@launch
             }
-            preferences.saveHeight(heightNumber)
+            userPreferences.saveHeight(heightNumber)
             _uiEvent.send(UiEvent.Success)
         }
     }
