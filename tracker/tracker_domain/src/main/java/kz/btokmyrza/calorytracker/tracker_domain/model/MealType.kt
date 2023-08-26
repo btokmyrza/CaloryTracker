@@ -12,7 +12,7 @@ sealed class MealType(val name: String) {
     data object Snack : MealType(SNACK)
 
     companion object {
-        fun fromString(name: String): MealType = when (name) {
+        fun fromString(name: String): MealType = when (name.uppercase()) {
             BREAKFAST -> Breakfast
             LUNCH -> Lunch
             DINNER -> Dinner
