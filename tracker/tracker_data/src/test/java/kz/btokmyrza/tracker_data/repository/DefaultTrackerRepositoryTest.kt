@@ -19,7 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-internal class DefaultTrackerRepositoryUnitTest {
+internal class DefaultTrackerRepositoryTest {
 
     private lateinit var repository: DefaultTrackerRepository
     private lateinit var mockWebServer: MockWebServer
