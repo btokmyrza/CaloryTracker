@@ -34,6 +34,8 @@ import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
@@ -163,7 +165,8 @@ internal fun TrackableFoodItem(
                                 color = MaterialTheme.colors.onSurface,
                             )
                             .alignBy(LastBaseline)
-                            .padding(spacing.spaceMedium),
+                            .padding(spacing.spaceMedium)
+                            .semantics { contentDescription = "Amount" },
                         value = trackableFoodUiState.amount,
                         onValueChange = onAmountChange,
                         keyboardOptions = KeyboardOptions(
