@@ -33,7 +33,7 @@ internal fun ExpandableMealItem(
             .fillMaxWidth()
             .padding(horizontal = spacing.spaceSmall),
     ) {
-        trackedFoods.forEach { food ->
+        trackedFoods.filter { it.mealType == meal.mealType }.forEach { food ->
             TrackedFoodItem(
                 trackedFood = food,
                 onDeleteClick = { onDeleteTrackedFoodClick(food) },
