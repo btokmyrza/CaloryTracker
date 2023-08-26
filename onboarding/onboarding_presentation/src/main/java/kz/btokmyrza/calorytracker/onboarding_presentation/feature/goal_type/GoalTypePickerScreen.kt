@@ -66,7 +66,7 @@ private fun GoalTypePickerScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = stringResource(id = R.string.whats_your_activity_level),
+                text = stringResource(id = R.string.lose_keep_or_gain_weight),
                 style = MaterialTheme.typography.h3,
             )
             Spacer(modifier = Modifier.height(spacing.spaceMedium))
